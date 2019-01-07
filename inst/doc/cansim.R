@@ -5,6 +5,9 @@ knitr::opts_chunk$set(
 )
 library(cansim)
 
+## ---- eval = FALSE-------------------------------------------------------
+#  install.packages("cansim")
+
 ## ----load_package_cran, echo=TRUE, message=FALSE, warning=FALSE, eval = FALSE----
 #  # install.packages("remotes")
 #  remotes::install_github("mountainmath/cansim")
