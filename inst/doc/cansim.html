@@ -7,19 +7,20 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content />
 
-<meta name="date" content="2019-01-06" />
+<meta name="date" content="2019-07-17" />
 
 <title>Getting started with the cansim package</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -81,7 +82,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -269,6 +292,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -277,7 +303,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Getting started with the cansim package</h1>
-<h4 class="date"><em>2019-01-06</em></h4>
+<h4 class="date">2019-07-17</h4>
 
 
 
@@ -312,7 +338,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; 4 2001-03  Cana… 2016… Labour force     Standard … Pers… 249   </span></a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; 5 2001-03  Cana… 2016… Employment       Estimate   Pers… 249   </span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 6 2001-03  Cana… 2016… Employment       Standard … Pers… 249   </span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; # ... with 14 more variables: SCALAR_FACTOR &lt;chr&gt;, SCALAR_ID &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; # … with 14 more variables: SCALAR_FACTOR &lt;chr&gt;, SCALAR_ID &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; #   VECTOR &lt;chr&gt;, COORDINATE &lt;chr&gt;, VALUE &lt;dbl&gt;, STATUS &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; #   SYMBOL &lt;chr&gt;, TERMINATED &lt;chr&gt;, DECIMALS &lt;chr&gt;, GeoUID &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; #   `Classification Code for Labour force characteristics` &lt;chr&gt;,</span></a>
@@ -341,7 +367,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; 4 2001-03  Cana… 2016… Labour force     Standard … Pers… 249    v1018…</span></a>
 <a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; 5 2001-03  Cana… 2016… Employment       Estimate   Pers… 249    v9141…</span></a>
 <a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; 6 2001-03  Cana… 2016… Employment       Standard … Pers… 249    v1018…</span></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; # ... with 12 more variables: COORDINATE &lt;chr&gt;, VALUE &lt;dbl&gt;, STATUS &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; # … with 12 more variables: COORDINATE &lt;chr&gt;, VALUE &lt;dbl&gt;, STATUS &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; #   SYMBOL &lt;chr&gt;, TERMINATED &lt;chr&gt;, DECIMALS &lt;chr&gt;, GeoUID &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; #   `Classification Code for Labour force characteristics` &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; #   `Hierarchy for Labour force characteristics` &lt;chr&gt;, `Classification</span></a>
@@ -351,7 +377,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">get_cansim_table_overview</span>(<span class="st">&quot;14-10-0293&quot;</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality, last 5 months</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; CANSIM Table 14-10-0293</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; Start Reference Period: 2001-03-01, End Reference Period: 2018-12-01, Frequency: Monthly</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; Start Reference Period: 2001-03-01, End Reference Period: 2019-06-01, Frequency: Monthly</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Column Geography (76)</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; Canada, Newfoundland and Labrador, Avalon Peninsula, Newfoundland and Labrador, South Coast-Burin Peninsula and Notre Dame-Central Bonavista Bay, Newfoundland and Labrador, West Coast-Northern Peninsula-Labrador, Newfoundland and Labrador, Prince Edward Island, Nova Scotia, Cape Breton, Nova Scotia, North Shore, Nova Scotia, Annapolis Valley, Nova Scotia, ...</span></a>
@@ -363,22 +389,24 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; Estimate, Standard error of estimate, Standard error of year-over-year change</span></a></code></pre></div>
 <p>When a table number is unknown, you can browse the available tables or search by survey name, keyword or title.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">search_cansim_tables</span>(<span class="st">&quot;housing price indexes&quot;</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 8 x 21</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   title title_en title_fr keywords_en keywords keywords_fr notes notes_en</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1 New … New hou… Indice … constructi… constru… constructi… &lt;p&gt;N… &lt;p&gt;New …</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 2 Non-… Non-res… Indice … constructi… constru… constructi… &lt;p&gt;A… &lt;p&gt;Arch…</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 3 New … New hou… Indice … constructi… constru… constructi… &lt;p&gt;N… &lt;p&gt;New …</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 4 New … New hou… Indices… constructi… constru… constructi… This… This ta…</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 5 New … New hou… Indice … constructi… constru… constructi… Mont… Monthly…</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 6 Pric… Price i… Indices… constructi… constru… constructi… This… This ta…</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 7 Pric… Price i… Indices… constructi… constru… constructi… &lt;p&gt;T… &lt;p&gt;This…</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 8 New … New hou… Indices… constructi… constru… constructi… This… This ta…</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; # ... with 13 more variables: notes_fr &lt;chr&gt;, state &lt;chr&gt;, subject &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; #   date_published &lt;chr&gt;, frequency &lt;chr&gt;, revision_id &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; #   time_period_coverage_start &lt;chr&gt;, time_period_coverage_end &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; #   metadata_created &lt;chr&gt;, metadata_modified &lt;chr&gt;, url_en &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; #   url_fr &lt;chr&gt;, cansim_table_number &lt;chr&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 21</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;    title title_en title_fr keywords_en keywords keywords_fr notes notes_en</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;  1 New … New hou… Indice … constructi… constru… constructi… &lt;p&gt;N… &lt;p&gt;New …</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;  2 Buil… Buildin… Indices… constructi… constru… constructi… &lt;p&gt;B… &lt;p&gt;Buil…</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;  3 Expe… Experim… Indice … constructi… constru… constructi… &lt;p&gt;E… &lt;p&gt;Expe…</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;  4 Pric… Price i… Indices… constructi… constru… constructi… &lt;p&gt;T… &lt;p&gt;This…</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt;  5 New … New hou… Indices… constructi… constru… constructi… This… This ta…</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;  6 Pric… Price i… Indices… constructi… constru… constructi… This… This ta…</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt;  7 New … New hou… Indice … constructi… constru… constructi… &lt;p&gt;N… &lt;p&gt;New …</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt;  8 Non-… Non-res… Indice … constructi… constru… constructi… &lt;p&gt;A… &lt;p&gt;Arch…</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt;  9 New … New hou… Indices… constructi… constru… constructi… This… This ta…</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 10 New … New hou… Indice … constructi… constru… constructi… Mont… Monthly…</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; # … with 13 more variables: notes_fr &lt;chr&gt;, state &lt;chr&gt;, subject &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; #   date_published &lt;chr&gt;, frequency &lt;chr&gt;, revision_id &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; #   time_period_coverage_start &lt;chr&gt;, time_period_coverage_end &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; #   metadata_created &lt;chr&gt;, metadata_modified &lt;chr&gt;, url_en &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; #   url_fr &lt;chr&gt;, cansim_table_number &lt;chr&gt;</span></a></code></pre></div>
 <p>Individual series in Statistics Canada data tables can also be accessed by using individual numbered vectors. This is especially useful when building reports using specific indicators. For convenience, the <code>cansim</code> package allows users to specify named vectors, where the <code>label</code> field will be added to the returned data frame containing the specified name for each vector.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">get_cansim_vector</span>(<span class="kw">c</span>(<span class="st">&quot;Metro Van Apartment Construction Price Index&quot;</span>=<span class="st">&quot;v44176267&quot;</span>,</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">                    <span class="st">&quot;Metro Van CPI&quot;</span>=<span class="st">&quot;v41692930&quot;</span>),</a>
@@ -387,12 +415,12 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; # A tibble: 5 x 10</span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   DECIMALS VALUE REF_DATE releaseTime SYMBOL frequencyCode SCALAR_ID</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;        &lt;int&gt;         &lt;int&gt;     &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 1        1  122. 2015-05… 2018-06-12…      0             6         0</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 2        1  122. 2015-06… 2018-06-12…      0             6         0</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 3        1  122. 2015-07… 2018-06-12…      0             6         0</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 4        1  123. 2015-08… 2018-06-12…      0             6         0</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 5        1  153. 2015-05… 2015-08-11…      0             9         0</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; # ... with 3 more variables: COORDINATE &lt;chr&gt;, VECTOR &lt;chr&gt;, label &lt;chr&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 1        1  153  2015-07… 2015-11-10…      0             9         0</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 2        1  122. 2015-05… 2018-06-12…      0             6         0</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 3        1  122. 2015-06… 2018-06-12…      0             6         0</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 4        1  122. 2015-07… 2018-06-12…      0             6         0</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 5        1  123. 2015-08… 2018-06-12…      0             6         0</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; # … with 3 more variables: COORDINATE &lt;chr&gt;, VECTOR &lt;chr&gt;, label &lt;chr&gt;</span></a></code></pre></div>
 </div>
 <div id="license" class="section level3">
 <h3>License</h3>
@@ -426,6 +454,9 @@ In doing any of the above, you shall:
   - Adapted from Statistics Canada, name of product, reference date. This does not constitute an endorsement by Statistics Canada of this product.</code></pre>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
