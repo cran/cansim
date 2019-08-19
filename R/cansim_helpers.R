@@ -42,6 +42,10 @@ response_status_code_translation <- list(
   "8"="Invalid number of reference periods"
 )
 
+response_error_translation <- list(
+  "503"="StatCan website is currently unavailable"
+)
+
 get_with_timeout_retry <- function(url,timeout=200,retry=3,path=NA){
   if (!is.na(path)) {
     response <- purrr::safely(httr::GET)(url,httr::timeout(timeout),httr::write_disk(path,overwrite = TRUE))
@@ -56,6 +60,10 @@ get_with_timeout_retry <- function(url,timeout=200,retry=3,path=NA){
       message("Got timeout from StatCan, giving up")
       response=response$result
     }
+  } else if (response$result$status_code %in% names(response_error_translation)){
+    stop(sprintf("%s\nReturned status code %s",response_error_translation[[as.character(response$result$status_code)]], response$result$status_code),call.=FALSE)
+  } else if (response$result$status_code != 200){
+    stop(sprintf("Problem downloading data, returned status code %s.",response$result$status_code),call.=FALSE)
   } else {
     response=response$result
   }
@@ -109,23 +117,58 @@ short_prov.en <- c(
   "Canada"="CAN"
 )
 
-short_prov.fr <- c(
-  "Colombie-Britannique"="BC",
-  "Alberta"="AB",
-  "Saskatchewan"="SK",
-  "Manitoba"="MB",
-  "Ontario"="ON",
-  "Qu\u00E9bec"="QC",
-  "Nouveau-Brunswick"="NB",
-  "\u00CEle-du-Prince-\u00C9douard"="PE",
-  "Nouvelle-\u00C9cosse"="NS",
-  "Terre-Neuve-et-Labrador"="NL",
-  "Yukon"="YT",
-  "Territoires du Nord-Ouest"="NT",
-  "Nunavut"="NU",
-  "Territoires du Nord-Ouest incluant Nunavut"="NTNU",
-  "Canada"="CAN"
-)
+# short_prov.fr <- c(
+#   "Colombie-Britannique"="BC",
+#   "Alberta"="AB",
+#   "Saskatchewan"="SK",
+#   "Manitoba"="MB",
+#   "Ontario"="ON",
+#   "Qu\U00E9bec"="QC",
+#   "Nouveau-Brunswick"="NB",
+#   "\u00CEle-du-Prince-\U00C9douard"="PE",
+#   "Nouvelle-\U00C9cosse"="NS",
+#   "Terre-Neuve-et-Labrador"="NL",
+#   "Yukon"="YT",
+#   "Territoires du Nord-Ouest"="NT",
+#   "Nunavut"="NU",
+#   "Territoires du Nord-Ouest incluant Nunavut"="NTNU",
+#   "Canada"="CAN"
+# )
+
+short_prov.fr <- purrr::set_names(c(
+  "BC",
+  "AB",
+  "SK",
+  "MB",
+  "ON",
+  "QC",
+  "NB",
+  "PE",
+  "NS",
+  "NL",
+  "YT",
+  "NT",
+  "NU",
+  "NTNU",
+  "CAN"
+),c(
+  "Colombie-Britannique",
+  "Alberta",
+  "Saskatchewan",
+  "Manitoba",
+  "Ontario",
+  paste0("Qu",intToUtf8(0x00E9),"bec"),
+  "Nouveau-Brunswick",
+  paste0(intToUtf8(0x00CE),"le-du-Prince-",intToUtf8(0x00C9),"douard"),
+  paste0("Nouvelle-",intToUtf8(0x00C9),"cosse"),
+  "Terre-Neuve-et-Labrador",
+  "Yukon",
+  "Territoires du Nord-Ouest",
+  "Nunavut",
+  "Territoires du Nord-Ouest incluant Nunavut",
+  "Canada"
+))
+
 
 
 #' Add provincial abbreviations as factor
@@ -138,7 +181,7 @@ add_provincial_abbreviations <- function(data){
     data_geography_column <- "GEO"
     short_prov <- short_prov.en
   } else {
-    data_geography_column <- paste0("G\u00C9O")
+    data_geography_column <- paste0("G",intToUtf8(0x00C9),"O")
     short_prov <- short_prov.fr
   }
   data <- data %>%
