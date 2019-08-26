@@ -1,7 +1,7 @@
 Package: cansim
 Type: Package
 Title: Accessing Statistics Canada Data Table and Vectors
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(
     person("Jens", "von Bergmann", email = "jens@mountainmath.ca", role = c("cre")),
     person("Dmitry", "Shkolnik", email = "shkolnikd@gmail.com", role = c("aut")))
@@ -24,8 +24,8 @@ BugReports: https://github.com/mountainMath/cansim/issues
 VignetteBuilder: knitr
 Language: en-CA
 NeedsCompilation: no
-Packaged: 2019-08-19 08:11:23 UTC; jens
+Packaged: 2019-08-26 00:55:05 UTC; jens
 Author: Jens von Bergmann [cre],
   Dmitry Shkolnik [aut]
 Repository: CRAN
-Date/Publication: 2019-08-19 09:10:06 UTC
+Date/Publication: 2019-08-26 04:20:06 UTC
