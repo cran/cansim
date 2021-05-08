@@ -1,8 +1,7 @@
 ## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
 	collapse = TRUE,
-	comment = "#>",
-	eval = nzchar(Sys.getenv("COMPILE_VIG"))
+	comment = "#>"
 )
 library(cansim)
 
@@ -17,12 +16,6 @@ library(cansim)
 
 ## -----------------------------------------------------------------------------
 data <- get_cansim("14-10-0293")
-head(data)
-
-## -----------------------------------------------------------------------------
-library(dplyr)
-data <- get_cansim("14-10-0293") %>% 
-  normalize_cansim_values
 head(data)
 
 ## -----------------------------------------------------------------------------
