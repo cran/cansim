@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2021-05-07" />
+<meta name="date" content="2021-05-09" />
 
 <title>Working with large tables</title>
 
@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Working with large tables</h1>
 <h4 class="author"></h4>
-<h4 class="date">2021-05-07</h4>
+<h4 class="date">2021-05-09</h4>
 
 
 
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(connection)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   lazy query [?? x 19]</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.35.5</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   [/private/var/folders/m1/ptq5j32n35ngc_qmbyptppn40000gn/T/Rtmp4kF0hB/cansim_20100001_eng/20100001-eng.sqlite]</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   [/private/var/folders/m1/ptq5j32n35ngc_qmbyptppn40000gn/T/RtmpxeGzdx/cansim_20100001_eng/20100001-eng.sqlite]</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   REF_DATE GEO    DGUID  `Vehicle type`  `Origin of manu… Sales `Seasonal adjus…</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;           </span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1946-01  Canada 2016A… Total, new mot… Total, country … Units Unadjusted      </span></span>
@@ -254,8 +254,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 x 6</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cansimTableNumber language     timeCached          sqliteSize title  path     </span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;        &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    </span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 20-10-0001        eng          2021-05-07 16:45:07 44 Mb      New m… cansim_2…</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ca-ch-e_52        cansim_cach… NA                  &lt;NA&gt;       &lt;NA&gt;   cansim_c…</span></span></code></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 20-10-0001        eng          2021-05-09 23:41:18 44 Mb      New m… cansim_2…</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ca-ch-e_73        cansim_cach… NA                  &lt;NA&gt;       &lt;NA&gt;   cansim_c…</span></span></code></pre></div>
 <p>Cached data won’t update automatically, we will have to pass the <code>refresh=TRUE</code> option to refresh it manually when we want a fresh data pull from StatCan. If we want to free up disk space we can remove a cached table.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">remove_cansim_sqlite_cached_table</span>(<span class="st">&quot;20-10-0001&quot;</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Removing cached data for 20-10-0001 (eng)</span></span>
