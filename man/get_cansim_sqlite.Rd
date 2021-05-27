@@ -8,6 +8,7 @@ get_cansim_sqlite(
   cansimTableNumber,
   language = "english",
   refresh = FALSE,
+  auto_refresh = FALSE,
   timeout = 1000,
   cache_path = getOption("cansim.cache_path")
 )
@@ -19,19 +20,21 @@ get_cansim_sqlite(
 
 \item{refresh}{(Optional) When set to \code{TRUE}, forces a reload of data table (default is \code{FALSE})}
 
+\item{auto_refresh}{(Optional) When set to \code{TRUE}, it will reload of data table if a new version is available (default is \code{FALSE})}
+
 \item{timeout}{(Optional) Timeout in seconds for downloading cansim table to work around scenarios where StatCan servers drop the network connection.}
 
 \item{cache_path}{(Optional) Path to where to cache the table permanently. By default, the data is cached
 in the path specified by `getOption("cansim.cache_path")`, if this is set. Otherwise it will use `tempdir()`.}
 }
 \value{
-tibble format data table output with added Date column with inferred date objects and
-a "val_norm" column with normalized VALUE using the supplied scale factor
+A database connection to a local SQLite database with the StatCan Table data.
 }
 \description{
 Retrieves a data table using an NDM catalogue number as an SQLite table. Retrieved table data is
-cached permanently if a chache path is supplied or for duration of the current R session.
-This function is useful for large tables that don't have very often.
+cached permanently if a cache path is supplied or for duration of the current R session.
+The function will check against the lastest release data for the table and emit a warning message
+if the cached table is out of date.
 }
 \examples{
 \donttest{

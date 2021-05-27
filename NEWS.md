@@ -1,3 +1,10 @@
+# cansim 0.3.8
+## Minor changes
+* Exclude vignette from automatic CRAN checks to fix problem of CRAN checks failing when StatCan servers are down and lead to the package being removed from CRAN (checks are still active in local environment and when using GitHub action checks)
+* add release date info to cube metadata and cube list calls
+* add auto-refresh option for sqlite tables
+* remove deprecated `adjust_cansim_values_by_variable` function
+
 # cansim 0.3.7
 ## Minor changes
 * Fix problem with UTF-8 encoding on solaris

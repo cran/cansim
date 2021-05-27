@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2021-05-09" />
+<meta name="date" content="2021-05-26" />
 
 <title>Getting started with the cansim package</title>
 
@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Getting started with the cansim package</h1>
 <h4 class="author"></h4>
-<h4 class="date">2021-05-09</h4>
+<h4 class="date">2021-05-26</h4>
 
 
 
@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Taking a look at an overview of the data within a table is a common first step. This is implemented in the package with the <code>get_cansim_table_overview(table_number)</code> function.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_cansim_table_overview</span>(<span class="st">&quot;14-10-0293&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality, last 5 months</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality, last 5 months, inactive</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CANSIM Table 14-10-0293</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 2001-03-01, End Reference Period: 2020-12-01, Frequency: Monthly</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -207,9 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    title  title_en  title_fr  keywords_en  keywords  keywords_fr  notes notes_en</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;   </span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 New h… New hous… Indice d… constructio… construc… constructio… &lt;p&gt;N… &lt;p&gt;New …</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 New h… New hous… Indice d… constructio… construc… constructio… &lt;p&gt;N… &lt;p&gt;New …</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Resid… Resident… Indice d… housing, ho… housing,… housing, ho… &lt;p&gt;R… &lt;p&gt;Resi…</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Build… Building… Indices … housing, ho… housing,… housing, ho… &lt;p&gt;B… &lt;p&gt;Buil…</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Resid… Resident… Indice d… housing, ho… housing,… housing, ho… &lt;p&gt;R… &lt;p&gt;Resi…</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Build… Building… Indices … housing, ho… housing,… housing, ho… &lt;p&gt;B… &lt;p&gt;Buil…</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 New h… New hous… Indice d… constructio… construc… constructio… &lt;p&gt;N… &lt;p&gt;New …</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Resid… Resident… Indice d… housing, ho… housing,… housing, ho… &lt;p&gt;R… &lt;p&gt;Resi…</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Price… Price in… Indices … housing, ho… housing,… housing, ho… &lt;p&gt;T… &lt;p&gt;This…</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 New h… New hous… Indices … constructio… construc… constructio… This… This ta…</span></span>

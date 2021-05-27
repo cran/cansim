@@ -5,19 +5,20 @@ TIME_FORMAT <- "%Y-%m-%d %H:%M:%S"
 #' Retrieve a Statistics Canada data table using NDM catalogue number as SQLite database connection
 #'
 #' Retrieves a data table using an NDM catalogue number as an SQLite table. Retrieved table data is
-#' cached permanently if a chache path is supplied or for duration of the current R session.
-#' This function is useful for large tables that don't have very often.
+#' cached permanently if a cache path is supplied or for duration of the current R session.
+#' The function will check against the lastest release data for the table and emit a warning message
+#' if the cached table is out of date.
 #'
 #' @param cansimTableNumber the NDM table number to load
 #' @param language \code{"en"} or \code{"english"} for English and \code{"fr"} or \code{"french"} for French language versions (defaults to English)
 #' @param refresh (Optional) When set to \code{TRUE}, forces a reload of data table (default is \code{FALSE})
+#' @param auto_refresh (Optional) When set to \code{TRUE}, it will reload of data table if a new version is available (default is \code{FALSE})
 #' @param timeout (Optional) Timeout in seconds for downloading cansim table to work around scenarios where StatCan servers drop the network connection.
 #' @param cache_path (Optional) Path to where to cache the table permanently. By default, the data is cached
 #' in the path specified by `getOption("cansim.cache_path")`, if this is set. Otherwise it will use `tempdir()`.
 #  Set to higher values for large tables and slow network connection. (Default is \code{1000}).
 #'
-#' @return tibble format data table output with added Date column with inferred date objects and
-#' a "val_norm" column with normalized VALUE using the supplied scale factor
+#' @return A database connection to a local SQLite database with the StatCan Table data.
 #'
 #' @examples
 #' \donttest{
@@ -29,7 +30,8 @@ TIME_FORMAT <- "%Y-%m-%d %H:%M:%S"
 #' disconnect_cansim_sqlite(con)
 #' }
 #' @export
-get_cansim_sqlite <- function(cansimTableNumber, language="english", refresh=FALSE, timeout=1000,
+get_cansim_sqlite <- function(cansimTableNumber, language="english", refresh=FALSE, auto_refresh = FALSE,
+                              timeout=1000,
                        cache_path=getOption("cansim.cache_path")){
   have_custom_path <- !is.null(cache_path)
   if (!have_custom_path) cache_path <- tempdir()
@@ -41,6 +43,18 @@ get_cansim_sqlite <- function(cansimTableNumber, language="english", refresh=FAL
   if (!dir.exists(cache_path)) dir.create(cache_path)
   path <- paste0(base_path_for_table_language(cansimTableNumber,language),".zip")
   sqlite_path <- paste0(base_path_for_table_language(cansimTableNumber,language,cache_path),".sqlite")
+
+  last_downloaded <- list_cansim_sqlite_cached_tables() %>%
+    filter(.data$cansimTableNumber==cleaned_number) %>%
+    pull(.data$timeCached)
+  last_updated <- get_cansim_table_last_release_date(cleaned_number)
+
+  if (file.exists(sqlite_path) && auto_refresh && !is.na(last_downloaded) && !is.null(last_updated) &&
+      as.numeric(last_downloaded)<as.numeric(last_updated)) {
+    message(paste0("A newer version of ",cleaned_number," is available, auto-refreshing the table..."))
+    refresh=TRUE
+  }
+
   if (refresh | !file.exists(sqlite_path)){
     if (cleaned_language=="eng")
       message(paste0("Accessing CANSIM NDM product ", cleaned_number, " from Statistics Canada"))
@@ -102,6 +116,11 @@ get_cansim_sqlite <- function(cansimTableNumber, language="english", refresh=FAL
 
     meta2 <- readRDS(paste0(meta_base_path,"2"))
     geo_column_pos <- which(pull(meta2,dimension_name_column)==geography_column)
+    if (length(geo_column_pos)==0) {
+      geography_column <- ifelse(cleaned_language=="eng","Geography of origin",
+                                 paste0("G",intToUtf8(0x00E9),"ographie d'origine"))
+      geo_column_pos <- which(pull(meta2,dimension_name_column)==geography_column)
+    }
 
     if (length(geo_column_pos)==1) {
       hierarchy_prefix <- ifelse(cleaned_language=="eng","Hierarchy for",paste0("Hi",intToUtf8(0x00E9),"rarchie pour"))
@@ -146,6 +165,21 @@ get_cansim_sqlite <- function(cansimTableNumber, language="english", refresh=FAL
 
 
   } else {
+    if (is.na(last_downloaded)) message(paste0("Could not accesses date table ",cleaned_number," was cached."))
+    if (is.null(last_updated)) message(paste0("Could not accesses date table ",cleaned_number," was last updated."))
+    if (!is.na(last_downloaded) && !is.null(last_updated) &&
+        as.numeric(last_downloaded)<as.numeric(last_updated)) {
+      ld_date <- format(as.POSIXct(last_downloaded), tz="",usetz=FALSE,format="%Y-%m-%d")
+      lu_date <- format(as.POSIXct(last_updated), tz="",usetz=FALSE,format="%Y-%m-%d")
+      if (ld_date==lu_date) {
+        ld_date <- format(as.POSIXct(last_downloaded), tz="",usetz=FALSE,format="%Y-%m-%d %H:%M")
+        lu_date <- format(as.POSIXct(last_updated), tz="",usetz=FALSE,format="%Y-%m-%d %H:%M")
+      }
+      warning(paste0("Cached SQLite table ",cleaned_number," is out of date, it was last downloaded and cached ",ld_date,".\n",
+                     "There is a newer version of the table available, it was last updated ",
+                     lu_date,".\n",
+                     "Consider updating the cached version by passing the `refresh=TRUE` option."))
+    }
     if (cleaned_language=="eng")
       message(paste0("Reading CANSIM NDM product ",cleaned_number)," from cache.")
     else
@@ -166,7 +200,7 @@ get_cansim_sqlite <- function(cansimTableNumber, language="english", refresh=FAL
   con
 }
 
-#' disconnect from a cansim database connection
+#' Disconnect from a cansim database connection
 #'
 #' @param connection connection to database
 #' @return `NULL``
@@ -181,16 +215,17 @@ disconnect_cansim_sqlite <- function(connection){
   DBI::dbDisconnect(connection$src$con)
 }
 
-#' collect data from connection and normalize cansim table output
+#' Collect data from connection and normalize cansim table output
 #'
-#' @param connection connection to database
+#' @param connection A connection to a local StatCan table SQLite database as returned by \code{get_cansim_sqlite},
+#' possibly with filters or other \code{dbplyr} verbs applied
 #' @param replacement_value (Optional) the name of the column the manipulated value should be returned in. Defaults to adding the `val_norm` value field.
 #' @param normalize_percent (Optional) When \code{true} (the default) normalizes percentages by changing them to rates
 #' @param default_month The default month that should be used when creating Date objects for annual data (default set to "01")
 #' @param default_day The default day of the month that should be used when creating Date objects for monthly data (default set to "01")
 #' @param factors (Optional) Logical value indicating if dimensions should be converted to factors. (Default set to \code{false}).
 #' @param strip_classification_code (strip_classification_code) Logical value indicating if classification code should be stripped from names. (Default set to \code{false}).
-#' @return a tibble with the normalized data
+#' @return A tibble with the collected and normalized data
 #'
 #' @examples
 #' \donttest{
@@ -236,7 +271,7 @@ collect_and_normalize <- function(connection,
 list_cansim_sqlite_cached_tables <- function(cache_path=getOption("cansim.cache_path")){
   have_custom_path <- !is.null(cache_path)
   if (!have_custom_path) cache_path <- tempdir()
-  result <- dplyr::tibble(path=dir(cache_path,"cansim_")) %>%
+  result <- dplyr::tibble(path=dir(cache_path,"cansim_\\d+_")) %>%
     dplyr::mutate(cansimTableNumber=gsub("^cansim_|_eng$|_fra$","",.data$path) %>% cleaned_ndm_table_number()) %>%
     dplyr::mutate(language=gsub("^cansim_\\d+_","",.data$path)) %>%
     dplyr::mutate(title=NA_character_,
@@ -323,6 +358,7 @@ remove_cansim_sqlite_cached_table <- function(cansimTableNumber,language=NULL,ca
 #' @param connection connection to database
 #' @param table_name sql table name
 #' @param field name of field to index
+#' @return `NULL``
 #' @keywords internal
 create_index <- function(connection,table_name,field){
   field_index=paste0("index_",gsub("[^[:alnum:]]","_",field))
@@ -349,6 +385,8 @@ create_index <- function(connection,table_name,field){
 #' @param na na character strings
 #' @param text_encoding encoding of csv file (default UTF-8)
 #' @param delim (Optional) csv deliminator, default is ","
+#'
+#' @return A database connection
 #' @keywords internal
 csv2sqlite <- function(csv_file, sqlite_file, table_name, transform=NULL,chunk_size=5000000,
                        append=FALSE,col_types=NULL,na=c(NA,"..","","...","F"),
