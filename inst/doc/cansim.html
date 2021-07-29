@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2021-05-26" />
+<meta name="date" content="2021-07-28" />
 
 <title>Getting started with the cansim package</title>
 
@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Getting started with the cansim package</h1>
 <h4 class="author"></h4>
-<h4 class="date">2021-05-26</h4>
+<h4 class="date">2021-07-28</h4>
 
 
 
@@ -202,26 +202,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Column Statistics (3)</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Estimate, Standard error of estimate, Standard error of year-over-year change</span></span></code></pre></div>
 <p>When a table number is unknown, you can browse the available tables or search by survey name, keyword or title.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search_cansim_tables</span>(<span class="st">&quot;housing price indexes&quot;</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 11 x 21</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    title  title_en  title_fr  keywords_en  keywords  keywords_fr  notes notes_en</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;   </span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 New h… New hous… Indice d… constructio… construc… constructio… &lt;p&gt;N… &lt;p&gt;New …</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Resid… Resident… Indice d… housing, ho… housing,… housing, ho… &lt;p&gt;R… &lt;p&gt;Resi…</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Build… Building… Indices … housing, ho… housing,… housing, ho… &lt;p&gt;B… &lt;p&gt;Buil…</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 New h… New hous… Indice d… constructio… construc… constructio… &lt;p&gt;N… &lt;p&gt;New …</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Resid… Resident… Indice d… housing, ho… housing,… housing, ho… &lt;p&gt;R… &lt;p&gt;Resi…</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Price… Price in… Indices … housing, ho… housing,… housing, ho… &lt;p&gt;T… &lt;p&gt;This…</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 New h… New hous… Indices … constructio… construc… constructio… This… This ta…</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 New h… New hous… Indices … constructio… construc… constructio… This… This ta…</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Price… Price in… Indices … housing, ho… housing,… housing, ho… This… This ta…</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Non-r… Non-resi… Indice d… constructio… construc… constructio… &lt;p&gt;A… &lt;p&gt;Arch…</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 New h… New hous… Indice d… constructio… construc… constructio… Mont… Monthly…</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 13 more variables: notes_fr &lt;chr&gt;, state &lt;chr&gt;, subject &lt;chr&gt;,</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   date_published &lt;chr&gt;, frequency &lt;chr&gt;, revision_id &lt;chr&gt;,</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   time_period_coverage_start &lt;chr&gt;, time_period_coverage_end &lt;chr&gt;,</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   metadata_created &lt;chr&gt;, metadata_modified &lt;chr&gt;, url_en &lt;chr&gt;,</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   url_fr &lt;chr&gt;, cansim_table_number &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search_cansim_cubes</span>(<span class="st">&quot;housing price indexes&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Retrieving cube information from StatCan servers...</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 x 19</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cansim_table_num… cubeTitleEn   cubeTitleFr   productId cansimId cubeStartDate</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;    &lt;date&gt;       </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 18-10-0073        New housing … Indices des … 18100073  327-0005 1981-01-01   </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 18-10-0095        New housing … Indices de p… 18100095  327-0029 1981-01-01   </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 13 more variables: cubeEndDate &lt;date&gt;, releaseTime &lt;dttm&gt;,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   archived &lt;lgl&gt;, subjectCode &lt;chr&gt;, surveyCode &lt;chr&gt;, frequencyCode &lt;chr&gt;,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   corrections &lt;chr&gt;, dimensionNameEn &lt;chr&gt;, dimensionNameFr &lt;chr&gt;,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   surveyEn &lt;chr&gt;, surveyFr &lt;chr&gt;, subjectEn &lt;chr&gt;, subjectFr &lt;chr&gt;</span></span></code></pre></div>
 <p>Individual series in Statistics Canada data tables can also be accessed by using individual numbered vectors. This is especially useful when building reports using specific indicators. For convenience, the <code>cansim</code> package allows users to specify named vectors, where the <code>label</code> field will be added to the returned data frame containing the specified name for each vector.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_cansim_vector</span>(<span class="fu">c</span>(<span class="st">&quot;Metro Van Apartment Construction Price Index&quot;</span><span class="ot">=</span><span class="st">&quot;v44176267&quot;</span>,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Metro Van CPI&quot;</span><span class="ot">=</span><span class="st">&quot;v41692930&quot;</span>),</span>
@@ -231,10 +222,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 x 12</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DECIMALS VALUE REF_DATE  releaseTime SYMBOL frequencyCode SCALAR_ID COORDINATE</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;chr&gt;     </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1  122. 2015-05-… 2018-06-12…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1  122. 2015-06-… 2018-06-12…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1  122. 2015-07-… 2018-06-12…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1  123. 2015-08-… 2018-06-12…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1  122. 2015-05-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1  122. 2015-06-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1  122. 2015-07-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1  123. 2015-08-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1  153  2015-07-… 2015-11-10…      0             9         0 8.7.1.0.0…</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 4 more variables: VECTOR &lt;chr&gt;, label &lt;chr&gt;, val_norm &lt;dbl&gt;,</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Date &lt;date&gt;</span></span></code></pre></div>

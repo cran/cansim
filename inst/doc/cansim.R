@@ -23,7 +23,7 @@ head(data)
 get_cansim_table_overview("14-10-0293")
 
 ## -----------------------------------------------------------------------------
-search_cansim_tables("housing price indexes")
+search_cansim_cubes("housing price indexes")
 
 ## -----------------------------------------------------------------------------
 get_cansim_vector(c("Metro Van Apartment Construction Price Index"="v44176267",
