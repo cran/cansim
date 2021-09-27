@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2021-07-28" />
+<meta name="date" content="2021-09-26" />
 
 <title>Getting started with the cansim package</title>
 
@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Getting started with the cansim package</h1>
 <h4 class="author"></h4>
-<h4 class="date">2021-07-28</h4>
+<h4 class="date">2021-09-26</h4>
 
 
 
@@ -165,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Accessing CANSIM NDM product 14-10-0293 from Statistics Canada</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Parsing data</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 24</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 24</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   REF_DATE GEO    DGUID   UOM   UOM_ID SCALAR_FACTOR SCALAR_ID VECTOR COORDINATE</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;     </span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2001-03  Canada 2016A0… Pers… 249    thousands     3         v9141… 1.1.1     </span></span>
@@ -204,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When a table number is unknown, you can browse the available tables or search by survey name, keyword or title.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search_cansim_cubes</span>(<span class="st">&quot;housing price indexes&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Retrieving cube information from StatCan servers...</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 x 19</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 19</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cansim_table_num… cubeTitleEn   cubeTitleFr   productId cansimId cubeStartDate</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;    &lt;date&gt;       </span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 18-10-0073        New housing … Indices des … 18100073  327-0005 1981-01-01   </span></span>
@@ -219,14 +219,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">start_time =</span> <span class="st">&quot;2015-05-01&quot;</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">end_time=</span><span class="st">&quot;2015-08-01&quot;</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Accessing CANSIM NDM vectors from Statistics Canada</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 x 12</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DECIMALS VALUE REF_DATE  releaseTime SYMBOL frequencyCode SCALAR_ID COORDINATE</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;chr&gt;     </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1  122. 2015-05-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1  122. 2015-06-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1  122. 2015-07-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1  123. 2015-08-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1  153  2015-07-… 2015-11-10…      0             9         0 8.7.1.0.0…</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 12</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   DECIMALS VALUE REF_DATE   releaseTime SYMBOL frequencyCode SCALAR_ID COORDINATE</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;chr&gt;     </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1  122. 2015-05-01 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1  122. 2015-06-01 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1  122. 2015-07-01 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1  123. 2015-08-01 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1  153  2015-07-01 2015-11-10…      0             9         0 8.7.1.0.0…</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 4 more variables: VECTOR &lt;chr&gt;, label &lt;chr&gt;, val_norm &lt;dbl&gt;,</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Date &lt;date&gt;</span></span></code></pre></div>
 </div>
