@@ -153,6 +153,7 @@ get_cansim_table_list_page <- function(start_offset=0,max_rows=1000){
 #' list_cansim_tables()
 #' }
 #'
+#' @keywords internal
 #' @export
 list_cansim_tables <- function(refresh=FALSE){
   warning("This method is deprecated, please use `list_cansim_cubes` instead.")
@@ -216,6 +217,7 @@ list_cansim_tables <- function(refresh=FALSE){
 #' search_cansim_tables("Labour force")
 #' }
 #'
+#' @keywords internal
 #' @export
 search_cansim_tables <- function(search_term, search_fields = "both", refresh=FALSE){
   warning("This method is deprecated, please use `search_cansim_cubes` instead.")
@@ -249,6 +251,7 @@ search_cansim_tables <- function(search_term, search_fields = "both", refresh=FA
 #'
 #' @param lite Get the version without cube dimensions and comments for faster retrieval, default is \code{FALSE}.
 #' @param refresh Default is \code{FALSE}, repeated calls during the same session will hit the cached data.
+#' @param quiet Optional, suppress messages
 #' To refresh the code list during a running R session set to \code{TRUE}
 #'
 #' @return A tibble with available Statistics Canada data cubes, including NDM table number, cube title,
@@ -260,11 +263,11 @@ search_cansim_tables <- function(search_term, search_fields = "both", refresh=FA
 #' }
 #'
 #' @export
-list_cansim_cubes <- function(lite=FALSE,refresh=FALSE){
+list_cansim_cubes <- function(lite=FALSE,refresh=FALSE,quiet=FALSE){
   directory <- tempdir() #getOption("cansim.cache_path")
   path <- file.path(directory,paste0("cansim_cube_list_",ifelse(lite,"lite","regular"),".Rda"))
   if (refresh | !file.exists(path)) {
-    message("Retrieving cube information from StatCan servers...")
+    if (!quiet) message("Retrieving cube information from StatCan servers...")
     url=ifelse(lite,"https://www150.statcan.gc.ca/t1/wds/rest/getAllCubesListLite","https://www150.statcan.gc.ca/t1/wds/rest/getAllCubesList")
     r<-get_with_timeout_retry(url)
     if (r$status_code==200) {
@@ -358,7 +361,7 @@ list_cansim_cubes <- function(lite=FALSE,refresh=FALSE){
       saveRDS(data,path)
     }
   } else {
-    message("Retrieving cube information from temporary cache.")
+    if (!quiet) message("Retrieving cube information from temporary cache.")
     data <- readRDS(path)
   }
   data
