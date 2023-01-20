@@ -1,9 +1,14 @@
-cansium 0.3.13
+# cansim 0.3.14
+## Minor changes
+* Better header parsing to avoid warning messages
+* Fix problem with some semi-wide tables
+
+# cansim 0.3.13
 ## Minor changes
 * Speed up access to cached sqlite tables
 * Fix problem with `get_cansim_vector_info()`
 
-cansium 0.3.12
+# cansim 0.3.12
 ## Major changes
 * Fix bug that causes collect_and_normalize not to function on some operating systems
 
