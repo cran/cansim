@@ -1,7 +1,7 @@
 Package: cansim
 Type: Package
 Title: Accessing Statistics Canada Data Table and Vectors
-Version: 0.3.14
+Version: 0.3.15
 Authors@R: c(
     person("Jens", "von Bergmann", email = "jens@mountainmath.ca", role = c("cre")),
     person("Dmitry", "Shkolnik", email = "shkolnikd@gmail.com", role = c("aut")))
@@ -19,7 +19,7 @@ Depends: R (>= 2.10)
 Imports: digest (>= 0.1), dplyr (>= 0.7), httr (>= 1.0.0), jsonlite (>=
         1.0), readr, rlang, xml2, rvest, stringr, purrr, tibble, utils,
         DBI, RSQLite
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: knitr, rmarkdown, scales, tidyr, ggplot2, dbplyr
 URL: https://github.com/mountainMath/cansim,
         https://mountainmath.github.io/cansim/,
@@ -27,8 +27,8 @@ URL: https://github.com/mountainMath/cansim,
 BugReports: https://github.com/mountainMath/cansim/issues
 VignetteBuilder: knitr
 Language: en-CA
-Packaged: 2023-01-20 06:05:01 UTC; jens
+Packaged: 2023-10-10 23:29:46 UTC; jens
 Author: Jens von Bergmann [cre],
   Dmitry Shkolnik [aut]
 Repository: CRAN
-Date/Publication: 2023-01-20 06:20:05 UTC
+Date/Publication: 2023-10-10 23:50:02 UTC
