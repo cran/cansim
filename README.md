@@ -88,7 +88,7 @@ More detailed usage examples are available in the _Retrieving individual Statist
 
 The `get_cansim_table_overview` function displays an overview of table information. If the table is not yet downloaded and cached it will first download the table itself. Let's take a look what's in the table we are interested in.
 ```{r}
-get_cansim_table_overview(36-10-040)
+get_cansim_table_overview("36-10-040")
 ```
 
 ### Listing available tables
@@ -173,7 +173,7 @@ If you want to get in touch, we are pretty good at responding via email or via t
 
 If you wish to cite the `cansim` package in your work:
 
-  von Bergmann, J., Dmitry Shkolnik (2023). cansim: functions and convenience tools for accessing Statistics Canada data tables. v0.3.15.
+  von Bergmann, J., Dmitry Shkolnik (2023). cansim: functions and convenience tools for accessing Statistics Canada data tables. v0.3.16.
 
 A BibTeX entry for LaTeX users is
 ```
@@ -181,7 +181,7 @@ A BibTeX entry for LaTeX users is
     author = {Jens {von Bergmann} and Dmitry Shkolnik},
     title = {cansim: functions and convenience tools for accessing Statistics Canada data tables},
     year = {2023},
-    note = {R package version 0.3.15},
+    note = {R package version 0.3.16},
     url = {https://mountainmath.github.io/cansim/}
   }
 ```
