@@ -12,7 +12,7 @@
 
 <meta name="author" content />
 
-<meta name="date" content="2024-03-12" />
+<meta name="date" content="2024-11-06" />
 
 <title>Getting started with the cansim package</title>
 
@@ -51,7 +51,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -62,7 +62,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -341,7 +341,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore">Getting started with the cansim
 package</h1>
 <h4 class="author"></h4>
-<h4 class="date">2024-03-12</h4>
+<h4 class="date">2024-11-06</h4>
 
 
 
@@ -376,21 +376,21 @@ use <code>get_cansim</code> to download the entire table.</p>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; Parsing data</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">head</span>(data)</span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 24</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;   REF_DATE GEO    DGUID   UOM   UOM_ID SCALAR_FACTOR SCALAR_ID VECTOR COORDINATE</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;     </span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 1 2001-03  Canada 2016A0… Pers… 249    thousands     3         v9141… 1.1.1     </span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 2 2001-03  Canada 2016A0… Pers… 249    thousands     3         v9141… 1.2.1     </span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; 3 2001-03  Canada 2016A0… Pers… 249    thousands     3         v1018… 1.2.2     </span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 4 2001-03  Canada 2016A0… Pers… 249    thousands     3         v1018… 1.2.3     </span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 5 2001-03  Canada 2016A0… Pers… 249    thousands     3         v9141… 1.3.1     </span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; 6 2001-03  Canada 2016A0… Pers… 249    thousands     3         v1018… 1.3.2     </span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 15 more variables: VALUE &lt;dbl&gt;, STATUS &lt;chr&gt;, SYMBOL &lt;chr&gt;,</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; #   TERMINATED &lt;chr&gt;, DECIMALS &lt;chr&gt;, GeoUID &lt;chr&gt;, `Hierarchy for GEO` &lt;chr&gt;,</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; #   `Classification Code for Labour force characteristics` &lt;chr&gt;,</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; #   `Hierarchy for Labour force characteristics` &lt;chr&gt;,</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; #   `Classification Code for Statistics` &lt;chr&gt;,</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt; #   `Hierarchy for Statistics` &lt;chr&gt;, val_norm &lt;dbl&gt;, Date &lt;date&gt;,</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co">#&gt; #   `Labour force characteristics` &lt;fct&gt;, Statistics &lt;fct&gt;</span></span></code></pre></div>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;   REF_DATE GEO    DGUID          Labour force characte…¹ Statistics UOM   UOM_ID</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;fct&gt;  &lt;chr&gt;          &lt;fct&gt;                   &lt;fct&gt;      &lt;chr&gt; &lt;chr&gt; </span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 1 2001-03  Canada 2016A000011124 Population              Estimate   Pers… 249   </span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 2 2001-03  Canada 2016A000011124 Labour force            Estimate   Pers… 249   </span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; 3 2001-03  Canada 2016A000011124 Labour force            Standard … Pers… 249   </span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 4 2001-03  Canada 2016A000011124 Labour force            Standard … Pers… 249   </span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 5 2001-03  Canada 2016A000011124 Employment              Estimate   Pers… 249   </span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; 6 2001-03  Canada 2016A000011124 Employment              Standard … Pers… 249   </span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; # ℹ abbreviated name: ¹​`Labour force characteristics`</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more variables: SCALAR_FACTOR &lt;chr&gt;, SCALAR_ID &lt;chr&gt;, VECTOR &lt;chr&gt;,</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; #   COORDINATE &lt;chr&gt;, VALUE &lt;dbl&gt;, STATUS &lt;chr&gt;, SYMBOL &lt;chr&gt;,</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; #   TERMINATED &lt;chr&gt;, DECIMALS &lt;chr&gt;, GeoUID &lt;chr&gt;, `Hierarchy for GEO` &lt;chr&gt;,</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; #   `Classification Code for Labour force characteristics` &lt;chr&gt;,</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt; #   `Hierarchy for Labour force characteristics` &lt;chr&gt;,</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co">#&gt; #   `Classification Code for Statistics` &lt;chr&gt;, …</span></span></code></pre></div>
 <p>By default, the data tables retrieved by the package comes in the
 original format provided by Statistics Canada and is enriched by several
 added columns and transformations.</p>
@@ -415,18 +415,19 @@ retain their original ordering.</li>
 first step. This is implemented in the package with the
 <code>get_cansim_table_overview(table_number)</code> function.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">get_cansim_table_overview</span>(<span class="st">&quot;14-10-0293&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality, last 5 months, inactive</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; CANSIM Table 14-10-0293</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 2001-03-01, End Reference Period: 2020-12-01, Frequency: Monthly</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; Column Geography (76)</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Newfoundland and Labrador, Prince Edward Island, Nova Scotia, New Brunswick, Quebec, Ontario, Manitoba, Saskatchewan, Alberta, British Columbia, ...</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Column Labour force characteristics (10)</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Labour force, Not in labour force, Employment, Unemployment, Full-time employment, Part-time employment, Population, Unemployment rate, Participation rate, Employment rate</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; Column Statistics (3)</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; Estimate, Standard error of estimate, Standard error of year-over-year change</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; Reading CANSIM NDM product 14-10-0293 information from cache.</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality, last 5 months, inactive</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; CANSIM Table 14-10-0293</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 2001-03-01, End Reference Period: 2020-12-01, Frequency: Monthly</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Column Geography (76)</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Newfoundland and Labrador, Prince Edward Island, Nova Scotia, New Brunswick, Quebec, Ontario, Manitoba, Saskatchewan, Alberta, British Columbia, ...</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Column Labour force characteristics (10)</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; Labour force, Not in labour force, Employment, Unemployment, Full-time employment, Part-time employment, Population, Unemployment rate, Participation rate, Employment rate</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; Column Statistics (3)</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; Estimate, Standard error of estimate, Standard error of year-over-year change</span></span></code></pre></div>
 <p>When a table number is unknown, you can browse the available tables
 or search by survey name, keyword or title.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">search_cansim_cubes</span>(<span class="st">&quot;housing price indexes&quot;</span>)</span>
@@ -451,7 +452,7 @@ containing the specified name for each vector.</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                  <span class="at">start_time =</span> <span class="st">&quot;2015-05-01&quot;</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                  <span class="at">end_time=</span><span class="st">&quot;2015-08-01&quot;</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Accessing CANSIM NDM vectors from Statistics Canada</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 12</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 17</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;   DECIMALS VALUE REF_DATE  releaseTime SYMBOL frequencyCode SCALAR_ID COORDINATE</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;chr&gt;     </span></span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; 1        1  122. 2015-05-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
@@ -459,7 +460,10 @@ containing the specified name for each vector.</p>
 <span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 3        1  122. 2015-07-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
 <span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 4        1  123. 2015-08-… 2021-07-28…      0             6         0 27.2.0.0.…</span></span>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 5        1  153  2015-07-… 2015-11-10…      0             9         0 8.7.1.0.0…</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: VECTOR &lt;chr&gt;, label &lt;chr&gt;, val_norm &lt;dbl&gt;, Date &lt;date&gt;</span></span></code></pre></div>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 9 more variables: VECTOR &lt;chr&gt;, cansimTableNumber &lt;chr&gt;, label &lt;chr&gt;,</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; #   val_norm &lt;dbl&gt;, Date &lt;date&gt;, GEO &lt;fct&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; #   `Products and product groups` &lt;fct&gt;, `Type of building` &lt;fct&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; #   `Major sub-trade group` &lt;fct&gt;</span></span></code></pre></div>
 </div>
 <div id="license" class="section level3">
 <h3>License</h3>
