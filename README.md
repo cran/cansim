@@ -43,7 +43,7 @@ remotes::install_github("mountainmath/cansim")
 
 The package accepts use of both old-format ("051-0013") or new-format ("17-10-0016-01") table catalogue numbers to download entire data tables as tidy data frames. Calling either the legacy CANSIM table number or the new NDM number will load the same data. Since the transition to the new data repository, existing tables will have retained their old-format numbers, but any newly created tables will have only new-format names. 
 
-```{r}
+```r
 # Retrieve data for births table: 17-10-0016-01 (formerly: CANSIM 051-0013)
 births <- get_cansim("051-0013")
 births <- get_cansim("17-10-0016")
@@ -231,7 +231,7 @@ If you want to get in touch, we are pretty good at responding via email or via t
 
 If you wish to cite the `cansim` package in your work:
 
-  von Bergmann, J., Dmitry Shkolnik (2024). cansim: functions and convenience tools for accessing Statistics Canada data tables. v0.4. DOI: 10.32614/CRAN.package.cansim
+  von Bergmann, J., Dmitry Shkolnik (2024). cansim: functions and convenience tools for accessing Statistics Canada data tables. v0.4.1. DOI: 10.32614/CRAN.package.cansim
 
 A BibTeX entry for LaTeX users is
 
@@ -241,7 +241,7 @@ A BibTeX entry for LaTeX users is
     title = {cansim: functions and convenience tools for accessing Statistics Canada data tables},
     year = {2025},
     doi = {10.32614/CRAN.package.cansim},
-    note = {R package version 0.4},
+    note = {R package version 0.4.1},
     url = {https://mountainmath.github.io/cansim/}
   }
 ```
