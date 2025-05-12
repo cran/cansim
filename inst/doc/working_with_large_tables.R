@@ -72,7 +72,7 @@ data.memory <- get_cansim("20-10-0001") %>%
 
 data.memory %>% head()
 
-## -----------------------------------------------------------------------------
+## ----fig.alt="Vignette example plot, new motor vehicle sales"-----------------
 data.parquet %>%
   filter(Date>=as.Date("1990-01-01")) %>%
   ggplot(aes(x=Date,y=val_norm,color=`Vehicle type`)) +
