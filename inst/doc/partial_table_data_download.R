@@ -3,12 +3,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   cache = FALSE,
+  fig.width = 7,
+  fig.height = 5,
   eval = nzchar(Sys.getenv("COMPILE_VIG"))
 )
 
 ## ----setup--------------------------------------------------------------------
 library(cansim)
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 library(ggplot2)
 
 bp_template <- get_cansim_table_template("34-10-0285")

@@ -447,21 +447,17 @@ containing the specified name for each vector.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">get_cansim_vector</span>(<span class="fu">c</span>(<span class="st">&quot;Metro Van Apartment Construction Price Index&quot;</span><span class="ot">=</span><span class="st">&quot;v44176267&quot;</span>,</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                    <span class="st">&quot;Metro Van CPI&quot;</span><span class="ot">=</span><span class="st">&quot;v41692930&quot;</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                  <span class="at">start_time =</span> <span class="st">&quot;2015-05-01&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                  <span class="at">end_time=</span><span class="st">&quot;2015-08-01&quot;</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Accessing CANSIM NDM vectors from Statistics Canada</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 17</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;   REF_DATE   Date       GEO            Products and product…¹ `Type of building`</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;date&gt;     &lt;fct&gt;          &lt;fct&gt;                  &lt;fct&gt;             </span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; 1 2015-05-01 2015-05-01 Vancouver, Br… All-items              &lt;NA&gt;              </span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 2 2015-06-01 2015-06-01 Vancouver, Br… All-items              &lt;NA&gt;              </span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 3 2015-07-01 2015-07-01 Vancouver, Br… All-items              &lt;NA&gt;              </span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 4 2015-08-01 2015-08-01 Vancouver, Br… All-items              &lt;NA&gt;              </span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 5 2015-07-01 2015-07-01 Vancouver, Br… &lt;NA&gt;                   Apartment         </span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; # ℹ abbreviated name: ¹​`Products and product groups`</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 12 more variables: `Major sub-trade group` &lt;fct&gt;, label &lt;chr&gt;, VALUE &lt;dbl&gt;,</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; #   val_norm &lt;dbl&gt;, SCALAR_ID &lt;int&gt;, VECTOR &lt;chr&gt;, cansimTableNumber &lt;chr&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; #   COORDINATE &lt;chr&gt;, SYMBOL &lt;int&gt;, releaseTime &lt;chr&gt;, frequencyCode &lt;int&gt;,</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; #   DECIMALS &lt;int&gt;</span></span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                  <span class="at">end_time=</span><span class="st">&quot;2015-08-01&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Date,GEO,label,VALUE,val_norm)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Accessing CANSIM NDM vectors from Statistics Canada</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 5</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;   Date       GEO                         label                    VALUE val_norm</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;   &lt;date&gt;     &lt;fct&gt;                       &lt;chr&gt;                    &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 1 2015-05-01 Vancouver, British Columbia Metro Van CPI             122.     122.</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 2 2015-06-01 Vancouver, British Columbia Metro Van CPI             122.     122.</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 3 2015-07-01 Vancouver, British Columbia Metro Van CPI             122.     122.</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 4 2015-08-01 Vancouver, British Columbia Metro Van CPI             123.     123.</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 5 2015-07-01 Vancouver, British Columbia Metro Van Apartment Con…  153      153</span></span></code></pre></div>
 </div>
 <div id="license" class="section level3">
 <h3>License</h3>

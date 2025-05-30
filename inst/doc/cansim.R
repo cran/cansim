@@ -2,6 +2,9 @@
 knitr::opts_chunk$set(
 	collapse = TRUE,
 	comment = "#>",
+  fig.width = 7,
+  fig.height = 5,
+	cache = FALSE,
 	eval = nzchar(Sys.getenv("COMPILE_VIG"))
 )
 library(cansim)
@@ -29,5 +32,6 @@ search_cansim_cubes("housing price indexes")
 get_cansim_vector(c("Metro Van Apartment Construction Price Index"="v44176267",
                     "Metro Van CPI"="v41692930"),
                   start_time = "2015-05-01",
-                  end_time="2015-08-01")
+                  end_time="2015-08-01") |>
+  dplyr::select(Date,GEO,label,VALUE,val_norm)
 

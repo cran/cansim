@@ -2,6 +2,9 @@
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  cache = FALSE,
+  fig.width = 7,
+  fig.height = 5,
   eval = nzchar(Sys.getenv("COMPILE_VIG"))
 )
 
