@@ -349,9 +349,13 @@ SQLite database format using the <code>get_cansim_connection</code>
 function instead of the usual <code>get_cansim</code>. In these
 circumstances it is also useful to cache the data for longer than just
 the current R session, and the <code>data_cache</code> option allows to
-specify a permanent location. It defaults to
-<code>getOption(&quot;cansim.cache_path&quot;)</code>, and if this option is not
-set it will only cache the data for the duration of the current
+specify a permanent location. It defaults to the
+<code>CANSIM_CACHE_PATH</code> environment variable. It is recommended
+to set this in the <code>.Renviron</code> file so it’s accessible in all
+R sessions, the <code>set_cansim_cache_path()</code> function
+facilitates that and allows for installing this permanently via the
+<code>install=TRUE</code> option. If the environment variable is not set
+the package will only cache the data for the duration of the current
 session.</p>
 <p>For this vignette we use the (rather small) motor vehicle sales data
 as an example.</p>
@@ -471,7 +475,7 @@ differences in database formats are mostly abstracted away.</p>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="fu">glimpse</span>(connection.sqlite)</span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; Rows: ??</span></span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; Columns: 19</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; Database: sqlite 3.49.1 [/private/var/folders/z4/gcjq2cd93p3bs5bgp8j2vv240000gp/T/RtmpwR8AwV/cansim_20100001_sqlite_eng/20100001-eng.sqlite]</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; Database: sqlite 3.50.1 [/Users/jens/data/cansim.data/cansim_20100001_sqlite_eng/20100001-eng.sqlite]</span></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; $ REF_DATE                &lt;chr&gt; &quot;1946-01&quot;, &quot;1946-01&quot;, &quot;1946-01&quot;, &quot;1946-01&quot;, &quot;1…</span></span>
 <span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; $ GEO                     &lt;chr&gt; &quot;Canada&quot;, &quot;Canada&quot;, &quot;Canada&quot;, &quot;Canada&quot;, &quot;Canad…</span></span>
 <span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; $ GeoUID                  &lt;chr&gt; &quot;11124&quot;, &quot;11124&quot;, &quot;11124&quot;, &quot;11124&quot;, &quot;11124&quot;, &quot;…</span></span>
@@ -496,9 +500,9 @@ differences in database formats are mostly abstracted away.</p>
 inspect the member columns and variables available.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">get_cansim_table_overview</span>(<span class="st">&quot;20-10-0001&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Reading CANSIM NDM product 20-10-0001 information from cache.</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; 20100001</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; New motor vehicle sales, inactive</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; CANSIM Table 20-10-0001</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 2024-12-01, End Reference Period: 5, Frequency: 1946-01-01</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 1946-01-01, End Reference Period: 2024-12-01, Frequency: Monthly</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; Column Geography (11)</span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; Newfoundland and Labrador, Prince Edward Island, Nova Scotia, New Brunswick, Quebec, Ontario, Manitoba, Saskatchewan, Alberta, British Columbia and the Territories, ...</span></span>
@@ -716,14 +720,22 @@ care to manage that space properly. The
 <code>list_cansim_sqlite_cached_tables</code> function gives us an
 overview over the cached data we have.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">list_cansim_cached_tables</span>()</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 10</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt;   cansimTableNumber language dataFormat timeCached          niceSize  rawSize</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;       &lt;dbl&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; 1 20-10-0001        eng      feather    2025-05-30 12:47:09 10.5 Mb  11021778</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; 2 20-10-0001        eng      parquet    2025-05-30 12:47:04 1.1 Mb    1161363</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; 3 20-10-0001        eng      sqlite     2025-05-30 12:47:11 47.1 Mb  49410048</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: title &lt;chr&gt;, path &lt;chr&gt;, timeReleased &lt;dttm&gt;,</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt; #   upToDate &lt;lgl&gt;</span></span></code></pre></div>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 60 × 10</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt;    cansimTableNumber language dataFormat timeCached          niceSize  rawSize</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;       &lt;dbl&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt;  1 11-10-0004        eng      parquet    2025-07-18 22:22:12 1.8 Mb    1884578</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt;  2 11-10-0008        eng      parquet    2025-07-18 23:12:15 14.4 Mb  15047191</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt;  3 11-10-0009        eng      parquet    2025-07-18 22:06:31 2 Mb      2125776</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt;  4 11-10-0009        eng      sqlite     1900-01-01 01:00:00 &lt;NA&gt;           NA</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt;  5 11-10-0017        eng      parquet    2025-02-11 11:49:21 9.3 Mb    9767494</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt;  6 11-10-0047        eng      parquet    2025-07-15 14:44:05 918 Kb     940072</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt;  7 11-10-0191        eng      parquet    2025-05-01 13:48:11 12.5 Mb  13142229</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt;  8 11-10-0223        eng      parquet    2025-05-21 13:12:41 4.2 Mb    4404277</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt;  9 11-10-0239        eng      parquet    2025-07-18 22:30:23 27.7 Mb  29072464</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; 10 13-10-0418        eng      parquet    2025-06-22 15:37:38 18.9 Kb     19367</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 50 more rows</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: title &lt;chr&gt;, path &lt;chr&gt;, timeReleased &lt;dttm&gt;,</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt; #   upToDate &lt;lgl&gt;</span></span></code></pre></div>
 </div>
 <div id="removing-cached-data" class="section level2">
 <h2>Removing cached data</h2>

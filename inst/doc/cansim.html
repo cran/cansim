@@ -412,9 +412,9 @@ first step. This is implemented in the package with the
 <code>get_cansim_table_overview(table_number)</code> function.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">get_cansim_table_overview</span>(<span class="st">&quot;14-10-0293&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; Reading CANSIM NDM product 14-10-0293 information from cache.</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; 14100293</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality, last 5 months, inactive</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; CANSIM Table 14-10-0293</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 2020-12-01, End Reference Period: 3, Frequency: 2001-03-01</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Start Reference Period: 2001-03-01, End Reference Period: 2020-12-01, Frequency: Monthly</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Column Geography (76)</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Newfoundland and Labrador, Prince Edward Island, Nova Scotia, New Brunswick, Quebec, Ontario, Manitoba, Saskatchewan, Alberta, British Columbia, ...</span></span>
@@ -458,6 +458,36 @@ containing the specified name for each vector.</p>
 <span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 3 2015-07-01 Vancouver, British Columbia Metro Van CPI             122.     122.</span></span>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 4 2015-08-01 Vancouver, British Columbia Metro Van CPI             123.     123.</span></span>
 <span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 5 2015-07-01 Vancouver, British Columbia Metro Van Apartment Con…  153      153</span></span></code></pre></div>
+<p>Larger tables, or tables that update infrequently can be cached in
+database form for faster access and better performance. The
+<code>get_cansim_connection</code> function facilitates this, it works
+mostly identitcal to the <code>get_cansim</code> function, but returns a
+database connection to a local database with the StatCan Table data.
+Calling <code>collect_and_normalize</code>, after possibly filtering
+data, adds metadata and loads data into memory in a form that is
+identical to the data retrieved by <code>get_cansim</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">get_cansim_connection</span>(<span class="st">&quot;14-10-0293&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">collect_and_normalize</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; Reading CANSIM NDM product 14-10-0293 from parquet.</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">head</span>(data)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 24</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt;   REF_DATE Date       GEO    DGUID      GeoUID Labour force charact…¹ Statistics</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;date&gt;     &lt;fct&gt;  &lt;chr&gt;      &lt;chr&gt;  &lt;fct&gt;                  &lt;fct&gt;     </span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; 1 2001-03  2001-03-01 Canada 2016A0000… 11124  Population             Estimate  </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; 2 2001-03  2001-03-01 Canada 2016A0000… 11124  Labour force           Estimate  </span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; 3 2001-03  2001-03-01 Canada 2016A0000… 11124  Labour force           Standard …</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; 4 2001-03  2001-03-01 Canada 2016A0000… 11124  Labour force           Standard …</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; 5 2001-03  2001-03-01 Canada 2016A0000… 11124  Employment             Estimate  </span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; 6 2001-03  2001-03-01 Canada 2016A0000… 11124  Employment             Standard …</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; # ℹ abbreviated name: ¹​`Labour force characteristics`</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more variables: VALUE &lt;dbl&gt;, val_norm &lt;dbl&gt;, UOM &lt;chr&gt;, UOM_ID &lt;chr&gt;,</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; #   SCALAR_FACTOR &lt;chr&gt;, SCALAR_ID &lt;chr&gt;, VECTOR &lt;chr&gt;, COORDINATE &lt;chr&gt;,</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt; #   STATUS &lt;chr&gt;, SYMBOL &lt;chr&gt;, TERMINATED &lt;chr&gt;, DECIMALS &lt;chr&gt;,</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; #   `Hierarchy for GEO` &lt;chr&gt;,</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; #   `Classification Code for Labour force characteristics` &lt;chr&gt;,</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; #   `Hierarchy for Labour force characteristics` &lt;chr&gt;, …</span></span></code></pre></div>
+<p>For more information refer to the <em>Working with large tables</em>
+vignette.</p>
 </div>
 <div id="license" class="section level3">
 <h3>License</h3>

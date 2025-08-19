@@ -35,3 +35,8 @@ get_cansim_vector(c("Metro Van Apartment Construction Price Index"="v44176267",
                   end_time="2015-08-01") |>
   dplyr::select(Date,GEO,label,VALUE,val_norm)
 
+## -----------------------------------------------------------------------------
+data <- get_cansim_connection("14-10-0293") |>
+  collect_and_normalize()
+head(data)
+
